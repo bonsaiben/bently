@@ -6,12 +6,7 @@ $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 require 'polly'
 begin
   Polly::CLI.start
-rescue Polly::Error => e
-  Polly.ui.print_exception(e)
-  exit(1)
-rescue Interrupt => e
-  puts
-  Polly.ui.print_exception(e)
-  Polly.ui.say("Quitting...")
+rescue
+  puts "Unexpected error. Quitting..."
   exit(1)
 end
