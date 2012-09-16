@@ -1,6 +1,6 @@
 module Polly
 
-  class CLI << Thor
+  class CLI < Thor
   end
 
 end
