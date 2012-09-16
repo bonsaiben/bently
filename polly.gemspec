@@ -7,6 +7,9 @@ Gem::Specification.new do |s|
   s.authors     = ["Benjamin Sullivan"]
   s.email       = 'bsullivan2@gmail.com'
   s.homepage    = 'http://github.com/bonsaiben/polly'
+
+  s.add_dependency "thor", ">= 0.14.6"
+
   s.files       = `git ls-files`.split("\n")
   s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]

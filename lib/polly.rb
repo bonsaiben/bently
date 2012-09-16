@@ -1,5 +1,3 @@
-class Polly
-  def self.hi
-    puts "Hello world"
-  end
-end
+require 'thor'
+
+require 'polly/cli'
