@@ -8,7 +8,8 @@ end
     RAILS_GENERATOR = "rails g rspec:install"
 
     def bake
-      add_gem(GEMFILE_DEF) || return
+      add_gem(GEMFILE_DEF)
+      bundle_install
       command RAILS_GENERATOR
       super
     end
