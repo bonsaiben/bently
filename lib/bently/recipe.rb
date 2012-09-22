@@ -3,32 +3,14 @@ module Bently
   class Recipe
     
     BUNDLE_INSTALL = "bundle install"
+    RECIPE_DIR = "#{BENTLY_REPOSITORY}/lib/bently/recipe/*.rb"
 
     def initialize options={}
       @read_only = options[:read_only]
     end
 
     def self.list
-      Dir["#{BENTLY_REPOSITORY}/lib/bently/recipe/*.rb"].map{ |f| File.basename f, '.rb' }.sort
-    end
-
-    def self.camelize(term)
-      string = term.to_s
-      string = string.sub(/^[a-z\d]*/) { $&.capitalize }
-      string = string.gsub(/\-/,'_')
-      string.gsub(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{$2.capitalize}" }.gsub('/', '::')
-    end
-
-    if Module.method(:const_get).arity == 1
-      def self.constantize(camel_cased_word)
-        name = camel_cased_word
-        Bently.const_defined?(name) ? Bently.const_get(name) : Bently.const_missing(name)
-      end
-    else
-      def self.constantize(camel_cased_word)
-        name = camel_cased_word
-        Bently.const_defined?(name, false) ? Bently.const_get(name) : Bently.const_missing(name)
-      end
+      Dir[RECIPE_DIR].map{ |f| File.basename f, '.rb' }.sort
     end
 
     def self.from_name name
