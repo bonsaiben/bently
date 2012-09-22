@@ -32,7 +32,7 @@ module Bently
     end
 
     def self.from_name name
-      constantize(camelize(name))
+      "Bently::#{name.camelize}".constantize
     end
 
 
