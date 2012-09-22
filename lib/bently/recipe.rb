@@ -2,6 +2,7 @@ module Bently
 
   class Recipe
     
+    GEMFILE = 'Gemfile'
     BUNDLE_INSTALL = "bundle install"
     RECIPE_DIR = "#{BENTLY_REPOSITORY}/lib/bently/recipe/*.rb"
 
@@ -37,7 +38,7 @@ module Bently
       unless @read_only
         if confirm_step "Add to Gemfile"
           begin
-            cli.append_to_file 'Gemfile', gem_def
+            cli.append_to_file GEMFILE, gem_def
           rescue
             puts "Gemfile was not found. Aborting.."
             return false
