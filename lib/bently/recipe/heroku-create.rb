@@ -6,8 +6,6 @@ module Bently
       :from => /gem 'sqlite3'/,
       :to => "gem 'pg'"
     }
-    GSUB_SEARCH = /#\s*(root :to => 'welcome#index')/
-    GSUB_REPLACE = '\1'
     HEROKU_CREATE = 'heroku create'
     GIT_PUSH_HEROKU = 'git push heroku master'
     HEROKU_PS = 'heroku ps'
