@@ -1,16 +1,10 @@
 module Bently
 
-  class TwitterBootstrapRails < Recipe
+  class TwitterBootstrapRails < RailsRecipe
 
-    GEMFILE_DEF = "gem \"twitter-bootstrap-rails\", :group => :assets"
-    RAILS_GENERATOR = "rails g bootstrap:install"
-
-    def bake
-      add_gem(GEMFILE_DEF) || return
-      bundle_install
-      command RAILS_GENERATOR
-      super
-    end
+    step :add_gem, 'gem "twitter-bootstrap-rails", :group => :assets'
+    step :shell, 'bundle install'
+    step :shell, 'rails g bootstrap:install'
 
   end
 

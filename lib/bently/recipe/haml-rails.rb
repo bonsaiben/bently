@@ -1,16 +1,11 @@
 module Bently
 
-  class HamlRails < Recipe
+  class HamlRails < RailsRecipe
 
-    GEM_DEF =
-%{gem 'haml'
-gem 'haml-rails'}
+    step :add_gem, "gem 'haml'"
+    step :add_gem, "gem 'haml-rails'"
+    step :shell, 'bundle install'
 
-    def bake
-      add_gem GEM_DEF
-      bundle_install
-      super
-    end
   end
 
 end

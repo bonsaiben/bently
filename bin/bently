@@ -4,9 +4,5 @@ lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
 require 'bently'
-#begin
-  Bently::CLI.start
-#rescue
-#  puts "Unexpected error. Quitting..."
-#  exit(1)
-#end
+
+Bently::Himself.start

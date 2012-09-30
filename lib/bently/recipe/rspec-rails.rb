@@ -1,18 +1,23 @@
 module Bently
 
-  class RspecRails < Recipe
-    GEMFILE_DEF = %{group :test, :development do
-  gem "rspec-rails", "~> 2.0"
-end
-}
-    RAILS_GENERATOR = "rails g rspec:install"
+  class RspecRails < RailsRecipe
 
-    def bake
-      add_gem(GEMFILE_DEF)
-      bundle_install
-      command RAILS_GENERATOR
-      super
+    step :add_gem
+    step :shell, 'bundle install'
+    step :shell, "rails g rspec:install"
+
+  protected
+
+    def add_gem
+      super gem_def
     end
+
+    def gem_def
+%{group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end}
+    end
+
   end
 
 end

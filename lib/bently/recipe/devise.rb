@@ -1,18 +1,20 @@
 module Bently
 
-  class Devise < Recipe
-    GEMFILE_DEF = "gem 'devise'"
-    RAILS_GENERATOR = "rails g devise:install"
-    MODEL_GENERATOR = "rails g devise"
-    ASK_MODEL_GENERATOR = "Model name:"
+  class Devise < RailsRecipe
+  
+    step :add_gem, "gem 'devise'"
+    step :shell, 'bundle install'
+    step :shell, 'rails g devise:install'
+    step :generate_model
 
-    def bake
-      add_gem(GEMFILE_DEF) || return
-      bundle_install
-      command RAILS_GENERATOR
-      ask_command("#{MODEL_GENERATOR} MODEL", ASK_MODEL_GENERATOR){|a| "#{MODEL_GENERATOR} #{a}" }
-      super
+    def generate_model
+      shell(
+        lambda{|model| "rails g devise #{model}" }, 
+        :ask => "Enter a model name (ex. user):", 
+        :description => "Execute:\nrails g devise MODEL"
+      )
     end
+
   end
 
 end

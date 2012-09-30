@@ -2,17 +2,22 @@ module Bently
 
   class Gitignore < Recipe
 
-    GITIGNORE = 
+    step :touch_gitignore
+
+  protected
+
+    def touch_gitignore
+      touch :file => '.gitignore', :with => gitignore
+    end
+
+    def gitignore
 %{.DS_Store
 .rvmrc
 *.swap
 *.swo
-*.swp
-}
-
-    def bake
-      create_file ".gitignore", GITIGNORE
-      super
+*.swp}
     end
+
   end
+
 end

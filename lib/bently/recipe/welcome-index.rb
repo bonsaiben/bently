@@ -2,16 +2,8 @@ module Bently
 
   class WelcomeIndex < Recipe
 
-    RAILS_GENERATE = 'bundle exec rails g controller welcome index'
-    ROUTES_FILE = 'config/routes.rb'
-    GSUB_SEARCH = /#\s*(root :to => 'welcome#index')/
-    GSUB_REPLACE = '\1'
-
-    def bake
-      command RAILS_GENERATE
-      gsub_file ROUTES_FILE, GSUB_SEARCH, GSUB_REPLACE
-      super
-    end
+    step :shell, 'bundle exec rails g controller welcome index'
+    step :modify, :file => 'config/routes.rb', :from => /#\s*(root :to => 'welcome#index')/, :to => '\1'
 
   end
 

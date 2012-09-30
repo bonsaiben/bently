@@ -2,27 +2,24 @@ module Bently
 
   class HerokuCreate < Recipe
 
-    DB_GEM_GSUB = {
-      :from => /gem 'sqlite3'/,
-      :to => "gem 'pg'"
-    }
-    COMMIT_GEMFILE = 'git add Gemfile;git commit -m "use pg instead of sqlite3"'
-    HEROKU_CREATE = 'heroku create'
-    GIT_PUSH_HEROKU = 'git push heroku master'
-    HEROKU_PS = 'heroku ps'
-    HEROKU_OPEN = 'heroku open'
-    HEROKU_MIGRATE_DB = 'heroku run rake db:migrate'
+    step :add_pg_gem
+    step :shell, 'bundle install'
+    step :shell, 'git add Gemfile Gemfile.lock'
+    step :shell, 'git commit -m "use pg instead of sqlite3"'
+    step :shell, 'heroku create'
+    step :shell, 'git push heroku master'
+    step :shell, 'heroku ps'
+    step :shell, 'heroku open'
+    step :shell, 'heroku run rake db:migrate'
 
-    def bake
-      gsub_file GEMFILE, DB_GEM_GSUB[:from], DB_GEM_GSUB[:to]
-      bundle_install
-      command COMMIT_GEMFILE
-      command HEROKU_CREATE
-      command GIT_PUSH_HEROKU
-      command HEROKU_PS
-      command HEROKU_OPEN
-      command HEROKU_MIGRATE_DB
-      super
+  protected
+
+    def add_pg_gem
+      modify(
+        :file => 'Gemfile', 
+        :from => /gem 'sqlite3'/, 
+        :to => "gem 'pg'"
+      )
     end
 
   end
