@@ -83,10 +83,12 @@ module Bently
     end
 
     def append step
+      create_file(step.file) unless File.exists? step.file
       append_to_file step.file, "#{step.data}\n"
     end
 
     def prepend step
+      create_file(step.file) unless File.exists? step.file
       prepend_to_file step.file, "\n#{step.data}"
     end
 
