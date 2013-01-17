@@ -7,7 +7,7 @@ module Bently
     def touch_rvmrc
       ruby_version = `rvm current`.chomp
       shell(
-        lambda{|gemset| "echo \"rvm use #{ruby_version}@#{gemset}\"" }, 
+        lambda{|gemset| "echo \"rvm use #{ruby_version}@#{gemset}\" > .rvmrc" }, 
         :ask => "Enter a gemset name:", 
         :description => "Touch .rvmrc:\nrvm use #{ruby_version}@<gemset>"
       )
