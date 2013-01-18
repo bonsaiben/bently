@@ -143,3 +143,6 @@ To use a template, inherit from the template class instead of from Recipe.
 
     class Devise < RailsRecipe
 
+== License
+
+{The MIT License}[http://opensource.org/licenses/mit-license.php]
