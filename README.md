@@ -1,3 +1,5 @@
+[<img src="https://secure.travis-ci.org/bonsaiben/bently.png">](http://travis-ci.org/bonsaiben/bently)
+
 Bently allows you to create executable "recipes" for file and command-line operations that you do a lot.
 
 You can think of it as like a Homebrew for smaller, application-level installations and operations.
@@ -10,6 +12,8 @@ Installation
 I recommend cloning into an easy-to-find directory and build/install from there so that you can easily add your own custom recipes.
 
     $ git clone https://github.com/bonsaiben/bently.git
+    $ gem build bently.gemspec
+    $ gem install bently-x.y.z.gem
 
 Or you can install the Gem normally.
 
@@ -52,7 +56,15 @@ Here is what the recipe for devise looks like:
         step :append, :file => 'Gemfile', :with => "gem 'devise'"
         step :shell, 'bundle install'
         step :shell, 'rails g devise:install'
-        step :shell, 'rails g devise user'
+        step :generate_model
+
+        def generate_model
+          shell(
+            lambda{|model| "rails g devise #{model}" },
+            :ask => "Enter a model name (eg. user):",
+            :description => "Execute:\nrails g devise <model>"
+          )
+        end
       end
     end
 
@@ -133,3 +145,7 @@ To use a template, inherit from the template class instead of from Recipe.
 
     class Devise < RailsRecipe
 
+License
+=======
+
+[The MIT License](http://opensource.org/licenses/mit-license.php)
