@@ -1,3 +1,5 @@
+[<img src="https://secure.travis-ci.org/bonsaiben/bently.png">](http://travis-ci.org/bonsaiben/bently)
+
 Bently allows you to create executable "recipes" for file and command-line operations that you do a lot.
 
 You can think of it as like a Homebrew for smaller, application-level installations and operations.
