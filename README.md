@@ -10,6 +10,8 @@ Installation
 I recommend cloning into an easy-to-find directory and build/install from there so that you can easily add your own custom recipes.
 
     $ git clone https://github.com/bonsaiben/bently.git
+    $ gem build bently.gemspec
+    $ gem install bently-x.y.z.gem
 
 Or you can install the Gem normally.
 
@@ -52,7 +54,15 @@ Here is what the recipe for devise looks like:
         step :append, :file => 'Gemfile', :with => "gem 'devise'"
         step :shell, 'bundle install'
         step :shell, 'rails g devise:install'
-        step :shell, 'rails g devise user'
+        step :generate_model
+
+        def generate_model
+          shell(
+            lambda{|model| "rails g devise #{model}" },
+            :ask => "Enter a model name (eg. user):",
+            :description => "Execute:\nrails g devise <model>"
+          )
+        end
       end
     end
 
