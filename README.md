@@ -1,48 +1,73 @@
+[<img src="https://secure.travis-ci.org/bonsaiben/bently.png">](http://travis-ci.org/bonsaiben/bently)
+
 Bently allows you to create executable "recipes" for file and command-line operations that you do a lot.
 
-You can think of it as a Homebrew for Ruby gems.
+You can think of it as like a Homebrew for smaller, application-level installations and operations.
 
-I created it for quickly settings up and deploying Rails applications.
+I created it for rapid prototyping Rails applications.
 
 Installation
 ============
 
-You'll probably want to add your own custom recipes so I recommend cloning into an easy-to-find directory and build and install the gem from there.
+I recommend cloning into an easy-to-find directory and build/install from there so that you can easily add your own custom recipes.
 
-You can install the Gem if you'd prefer.
+    $ git clone https://github.com/bonsaiben/bently.git
+    $ gem build bently.gemspec
+    $ gem install bently-x.y.z.gem
 
-    gem install bently
+Or you can install the Gem normally.
+
+    $ gem install bently
+    
+    
+Basic Usage
+==============
+
+    bently list           # list recipes
+    bently read [RECIPE]  # display a recipe
+    bently bake [RECIPE]  # execute a recipe
 
 
 Example
 =======
 
-I start a new project that needs user authentication so I want to use Devise.
-Looking at the Devise README on GitHub I find the necessary steps for installing and configuring Devise.
+Adding devise to your Rails application.
 
-    add "gem 'devise'" to Gemfile
-    bundle install
-    rails g devise:install
-    rails g devise user
+    $ bently bake devise
+    
+You will be prompted before each step with a description of the operation and the option to skip.
 
-As a Bently recipe, this would look like:
+If you only want to preview the steps that would be executed by a recipe, run:
+
+    $ bently read devise
+    1. Append to Gemfile:
+      gem 'devise'
+    2. Execute:
+      bundle install
+    3. Execute:
+      rails g devise:install
+    4. Execute:
+      rails g devise <model>
+
+Here is what the recipe for devise looks like:
 
     module Bently
       class Devise < Recipe
         step :append, :file => 'Gemfile', :with => "gem 'devise'"
         step :shell, 'bundle install'
         step :shell, 'rails g devise:install'
-        step :shell, 'rails g devise user'
+        step :generate_model
+
+        def generate_model
+          shell(
+            lambda{|model| "rails g devise #{model}" },
+            :ask => "Enter a model name (eg. user):",
+            :description => "Execute:\nrails g devise <model>"
+          )
+        end
       end
     end
 
-And executing it is as simple as:
-
-    bently bake devise
-    
-Or if I just want a readout without executing:
-
-    bently read devise
 
 Recipes
 =======
@@ -94,10 +119,10 @@ remove a file
 
 You can also define custom steps that reduce to one of the above.
 
-    step :add_gem, "gem 'rails'"
+    step :add_gem, "rails"
     
     def add_gem gem
-      append :file => 'Gemfile', :with => gem
+      append :file => 'Gemfile', :with => "gem '#{gem}'"
     end
 
 Recipe Templates
@@ -110,14 +135,17 @@ Recipe templates can be created to encapsulate steps used across multiple recipe
         GEMFILE = 'Gemfile'
         
         def add_gem gem
-          append :file => GEMFILE, :with => gem
+          append :file => GEMFILE, :with => "gem '#{gem}'"
         end
         
       end
     end
 
-To use a template, inherit from the template class instead of Recipe.
+To use a template, inherit from the template class instead of from Recipe.
 
     class Devise < RailsRecipe
 
-Fork and accumulate your own collection of recipes.
+License
+=======
+
+[The MIT License](http://opensource.org/licenses/mit-license.php)
