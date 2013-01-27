@@ -13,7 +13,6 @@ module Bently
     def gitignore
 %{
 # Configuration files
-config/initializers/secret_token.rb
 config/database.yml
 
 # Generated files
