@@ -20,7 +20,7 @@ module Bently
       command_desc = command
       if command_desc.is_a?(Proc)
         placeholder = '...'
-        command_desc = command_desc.yield(placeholder)
+        command_desc = command_desc.call(placeholder)
       end
       "Execute:\n#{command_desc}"
     end

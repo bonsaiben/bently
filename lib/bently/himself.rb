@@ -69,7 +69,7 @@ module Bently
       command = step.command
       if command.is_a?(Proc)
         resp = ask(tab(magenta(step.question)))
-        command = command.yield(resp)
+        command = command.call(resp)
       end
       puts `#{command}`
     end
