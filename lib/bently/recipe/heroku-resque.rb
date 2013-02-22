@@ -2,7 +2,6 @@ module Bently
 
   class HerokuResque < RailsRecipe
 
-    step :shell, 'echo', :description => "WARNING:\nSome steps in this recipe may incur fees to your Heroku account. By proceeding you agree to bear full responsibility for fees charged to you as a result.", :action => 'proceed', :fail_on_skip => true
     step :add_gem, "gem 'resque', \"~> 1.22.0\""
     step :shell, 'bundle install'
     step :append, :file => 'Procfile', :with => 'resque: env TERM_CHILD=1 bundle exec rake jobs:work'
@@ -14,7 +13,6 @@ module Bently
     step :shell, 'heroku config | grep REDISTOGO_URL'
     step :touch_resque_initializer
     step :shell, 'echo REDISTOGO_URL=redis://localhost:6379 >> .env;more .env'
-    step :shell, 'heroku ps:scale resque=1'
 
   protected
 
