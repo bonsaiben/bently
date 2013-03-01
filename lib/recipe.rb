@@ -53,7 +53,7 @@ class Recipe
     end
   end
 
-  class Prepend < Operation
+  class Insert < Operation
     attr_reader :args, :file, :data, :options
     def initialize *args
       @file, @data, @options = @args = args
