@@ -16,12 +16,45 @@ module Bently
     end
 
     desc 'bake [RECIPE]', 'execute a recipe'
+    method_option :step, :default => false, :type => :boolean, :desc => "step through the recipe and prompt before executing each operation"
     def bake recipe
-      recipe = RecipeBook.find(recipe).new
-      exec recipe
+      recipe = RecipeBook.find(recipe)
+      if options['step']
+        step recipe
+      else
+        exec recipe
+      end
     end
 
+
     protected
+
+    def step recipe
+      recipe.breakdown.each do |op|
+        pretendly { run_operation op }
+        a = ask("Perform this operation [y,n,q]?").downcase
+        exit if a == 'q'
+        if a == 'y'
+          quietly { run_operation op }
+        end
+      end
+    end
+
+    def pretendly
+      set_option :pretend, true
+      yield
+      set_option :pretend, false
+    end
+
+    def quietly
+      set_option :quiet, true
+      yield
+      set_option :quiet, false
+    end
+
+    def set_option option, val
+      self.options = self.options.merge(option => val)
+    end
 
     def exec recipe
       recipe.breakdown.each do |op|
