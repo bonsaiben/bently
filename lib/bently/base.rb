@@ -34,7 +34,7 @@ module Bently
       when Recipe::Say
         op.status ? say_status(*op.args) : say(*op.args)
       when Recipe::Run
-        run op.command, :verbose => :green
+        run op.command
       when Recipe::Create
         create_file *op.args
       when Recipe::Modify
