@@ -5,7 +5,7 @@ module Bently
 
     desc 'list [STRING]', 'list recipes'
     def list str=nil
-      recipes = RecipeBook.all
+      recipes = Recipebook.all
       recipes = recipes.select{|r| r =~ /#{str}/ } if str
       recipes.each {|f| puts f }
     end
@@ -13,14 +13,14 @@ module Bently
     desc 'read [RECIPE]', 'display a recipe'
     method_options :pretend => true
     def read recipe
-      recipe = RecipeBook.find(recipe)
+      recipe = Recipebook.find(recipe)
       exec recipe
     end
 
     desc 'bake [RECIPE]', 'execute a recipe'
     method_option :step, :default => false, :type => :boolean, :desc => "step through the recipe and prompt before executing each operation"
     def bake recipe
-      recipe = RecipeBook.find(recipe)
+      recipe = Recipebook.find(recipe)
       if options['step']
         step recipe
       else
@@ -78,7 +78,6 @@ module Bently
         create_file op.file unless File.exists? op.file
         say_status *op.say if op.say
         append_to_file *op.args
-        op.after.each{|s,t| say_status s, t, :magenta }
       when Recipe::Prepend
         create_file op.file unless File.exists? op.file
         prepend_to_file *op.args
@@ -87,6 +86,7 @@ module Bently
       when Recipe::Remove
         remove_file *op.args
       end
+      op.after.each{|s,t| say_status s, t, :magenta } if op.after
     end
 
     #def confirmed_step? step

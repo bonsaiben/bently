@@ -19,10 +19,10 @@ describe Bently::Base do
 
   describe "#read" do
     before do
-      @recipe_class = Class.new(Recipe){
+      @recipe_class = Class.new(Bently::Recipe){
         def initialize; run 'echo knead the dough' end
       }
-      Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+      Bently::Recipebook.stub(:find).and_return(@recipe_class)
     end
 
     it "triggers the operation" do
@@ -44,10 +44,10 @@ describe Bently::Base do
 
     context "given a run operation" do
       before do
-        @recipe_class = Class.new(Recipe){
+        @recipe_class = Class.new(Bently::Recipe){
           def initialize; run 'echo foobar' end
         }
-        Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+        Bently::Recipebook.stub(:find).and_return(@recipe_class)
       end
 
       it "performs the operation" do
@@ -59,10 +59,10 @@ describe Bently::Base do
 
     context "given a create operation" do
       before do
-        @recipe_class = Class.new(Recipe){
+        @recipe_class = Class.new(Bently::Recipe){
           def initialize; create 'file.rb', 'abc' end
         }
-        Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+        Bently::Recipebook.stub(:find).and_return(@recipe_class)
       end
 
       it "performs the operation" do
@@ -74,10 +74,10 @@ describe Bently::Base do
 
     context "given a modify operation" do
       before do
-        @recipe_class = Class.new(Recipe){
+        @recipe_class = Class.new(Bently::Recipe){
           def initialize; modify 'file.rb', /dog/, 'abc' end
         }
-        Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+        Bently::Recipebook.stub(:find).and_return(@recipe_class)
       end
 
       it "performs the operation" do
@@ -89,10 +89,10 @@ describe Bently::Base do
 
     context "given an append operation" do
       before do
-        @recipe_class = Class.new(Recipe){
+        @recipe_class = Class.new(Bently::Recipe){
           def initialize; append 'file.rb', 'abc' end
         }
-        Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+        Bently::Recipebook.stub(:find).and_return(@recipe_class)
       end
 
       it "performs the operation" do
@@ -104,10 +104,10 @@ describe Bently::Base do
 
     context "given a prepend operation" do
       before do
-        @recipe_class = Class.new(Recipe){
+        @recipe_class = Class.new(Bently::Recipe){
           def initialize; prepend 'file.rb', 'abc' end
         }
-        Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+        Bently::Recipebook.stub(:find).and_return(@recipe_class)
       end
 
       it "performs the operation" do
@@ -119,10 +119,10 @@ describe Bently::Base do
 
     context "given an insert operation" do
       before do
-        @recipe_class = Class.new(Recipe){
+        @recipe_class = Class.new(Bently::Recipe){
           def initialize; insert 'file.rb', 'abc', :after => 'whatever\n' end
         }
-        Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+        Bently::Recipebook.stub(:find).and_return(@recipe_class)
       end
 
       it "performs the operation" do
@@ -134,10 +134,10 @@ describe Bently::Base do
 
     context "given a remove operation" do
       before do
-        @recipe_class = Class.new(Recipe){
+        @recipe_class = Class.new(Bently::Recipe){
           def initialize; remove 'file.rb' end
         }
-        Bently::RecipeBook.stub(:find).and_return(@recipe_class)
+        Bently::Recipebook.stub(:find).and_return(@recipe_class)
       end
 
       it "performs the operation" do
