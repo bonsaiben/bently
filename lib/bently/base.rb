@@ -3,9 +3,11 @@ module Bently
   class Base < Thor
     include Thor::Actions
 
-    desc 'list', 'list recipes'
-    def list
-      RecipeBook.all.each {|f| puts f }
+    desc 'list [STRING]', 'list recipes'
+    def list str=nil
+      recipes = RecipeBook.all
+      recipes = recipes.select{|r| r =~ /#{str}/ } if str
+      recipes.each {|f| puts f }
     end
 
     desc 'read [RECIPE]', 'display a recipe'
