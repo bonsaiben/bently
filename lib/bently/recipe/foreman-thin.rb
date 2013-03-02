@@ -1,9 +1,9 @@
 module Bently
-  class FormanThin < RailsRecipe
+  class ForemanThin < RailsRecipe
 
-    name 'forman-thin'
+    name 'foreman-thin'
     category 'gem'
-    description 'downloads and installs forman and thin gems'
+    description 'downloads and installs foreman and thin gems'
     homepage 'https://github.com/plataformatec/devise'
     #version ''
 

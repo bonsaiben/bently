@@ -1,9 +1,9 @@
 module Bently
   class Foreman < RubyRecipe
 
-    name 'forman'
+    name 'foreman'
     category 'gem'
-    description 'downloads and installs forman gem'
+    description 'downloads and installs foreman gem'
     #homepage ''
     #version ''
 
