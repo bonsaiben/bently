@@ -9,7 +9,7 @@ module Bently
 
     def initialize
       gem_group [:test, :development] do
-        gem "cucumber-rails", require: false
+        gem "cucumber-rails", :require => false
         gem "database_cleaner"
       end
       bundle

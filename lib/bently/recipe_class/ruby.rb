@@ -8,7 +8,7 @@ module Bently
         @name = args[2]
       end
       def say; ['gemfile',@name] end
-      def args; [@file, @data, verbose: false] end
+      def args; [@file, @data, {:verbose => false}] end
     end
 
     def gem(*args)
