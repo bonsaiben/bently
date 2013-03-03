@@ -1,149 +1,59 @@
 [<img src="https://secure.travis-ci.org/bonsaiben/bently.png">](http://travis-ci.org/bonsaiben/bently)
 
-Bently allows you to create executable "recipes" for file and command-line operations that you do a lot.
+Bently is a community maintained library of executable recipes for rapid application development. The bulk of recipes are for automating installation and configuration of commonly-used dependencies. Another potential use case is feature scaffolding, or laying down basic implementation for common functionality like social authentication.
 
-You can think of it as like a Homebrew for smaller, application-level installations and operations.
+The goal of Bently is to reduce duplication in the development process across projects, with rapid prototyping in mind.
 
-I created it for rapid prototyping Rails applications.
+Bently is Homebrew meets Rails generators.
+
+Bently is built on top of Thor.
+
 
 Installation
 ============
 
-I recommend cloning into an easy-to-find directory and build/install from there so that you can easily add your own custom recipes.
+    gem install bently
 
-    $ git clone https://github.com/bonsaiben/bently.git
-    $ gem build bently.gemspec
-    $ gem install bently-x.y.z.gem
 
-Or you can install the Gem normally.
+Usage
+=====
 
-    $ gem install bently
-    
-    
-Basic Usage
-==============
-
-    bently list           # list recipes
-    bently read [RECIPE]  # display a recipe
-    bently bake [RECIPE]  # execute a recipe
+    bently list                   # list all recipes
+    bently list [STRING]          # search recipes matching a string
+    bently read [RECIPE]          # display a recipe without executing it
+    bently bake [RECIPE]          # execute all steps in recipe
+    bently bake [RECIPE] --step   # execute a recipe step by step, prompting before each step
+    bently source [RECIPE]        # output the URL for the document on which the recipe is based
 
 
 Example
 =======
 
-Adding devise to your Rails application.
+Installing and configuring devise in a Rails application.
 
     $ bently bake devise
-    
-You will be prompted before each step with a description of the operation and the option to skip.
+        gemfile  devise
+              1  
+              2  gem "devise"
+            run  bundle install from "."
+            run  rails generate devise:install from "."
+           TODO  rails generate devise MODEL
 
-If you only want to preview the steps that would be executed by a recipe, run:
-
-    $ bently read devise
-    1. Append to Gemfile:
-      gem 'devise'
-    2. Execute:
-      bundle install
-    3. Execute:
-      rails g devise:install
-    4. Execute:
-      rails g devise <model>
-
-Here is what the recipe for devise looks like:
-
-    module Bently
-      class Devise < Recipe
-        step :append, :file => 'Gemfile', :with => "gem 'devise'"
-        step :shell, 'bundle install'
-        step :shell, 'rails g devise:install'
-        step :generate_model
-
-        def generate_model
-          shell(
-            lambda{|model| "rails g devise #{model}" },
-            :ask => "Enter a model name (eg. user):",
-            :description => "Execute:\nrails g devise <model>"
-          )
-        end
-      end
-    end
-
-
-Recipes
-=======
-
-A recipe defines a series of steps. There are seven kinds of steps:
-
-Shell
-
-execute a command
-
-    step :shell, 'echo hello'
-
-Touch
-
-create a file with some content
-
-    step :touch, :file => 'file.rb', :with => 'content'
-
-Modify
-
-change a part of a file to something else
-
-    step :modify, :file => 'file.rb', :from => /old_text/, :to => 'new_text'
-
-Append
-
-add content to the end of a file
-
-    step :append, :file => 'file.rb', :with => 'put this at the bottom'
-
-Prepend
-
-add content to beginning of a file
-
-    step :prepend, :file => 'file.rb', :with => 'put this at the top'
-
-Insert
-
-add content before or after some part of a file
-
-    step :insert, :file => 'file.rb', :with => 'insert this', :after => 'after this'
-
-Remove
-
-remove a file
-
-    step :remove, :file => 'delete_me.txt'
-
-
-You can also define custom steps that reduce to one of the above.
-
-    step :add_gem, "rails"
-    
-    def add_gem gem
-      append :file => 'Gemfile', :with => "gem '#{gem}'"
-    end
-
-Recipe Templates
-================
-
-Recipe templates can be created to encapsulate steps used across multiple recipes.
-
-    module Bently
-      class RailsRecipe < Recipe
-        GEMFILE = 'Gemfile'
-        
-        def add_gem gem
-          append :file => GEMFILE, :with => "gem '#{gem}'"
-        end
-        
-      end
-    end
-
-To use a template, inherit from the template class instead of from Recipe.
+The recipe for devise looks like:
 
     class Devise < RailsRecipe
+      gem 'devise'
+      bundle
+      generate 'devise:install'
+      todo 'rails generate devise MODEL'
+    end
+
+
+Available Recipes
+=================
+
+You can browse the recipe library on GitHub: https://github.com/bonsaiben/bently/tree/master/lib/bently/recipe
+
 
 License
 -------
