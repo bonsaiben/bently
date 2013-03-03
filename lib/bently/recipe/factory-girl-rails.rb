@@ -8,7 +8,7 @@ module Bently
     #version ''
 
     def initialize
-      gem_group [:test] do
+      gem_group :test do
         gem "factory_girl_rails", "~> 4.0"
       end
       bundle

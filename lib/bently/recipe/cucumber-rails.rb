@@ -8,7 +8,7 @@ module Bently
     version '1.3.0'
 
     def initialize
-      gem_group [:test, :development] do
+      gem_group :test, :development do
         gem "cucumber-rails", :require => false
         gem "database_cleaner"
       end
