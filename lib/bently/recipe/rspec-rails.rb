@@ -1,23 +1,19 @@
 module Bently
-
   class RspecRails < RailsRecipe
 
-    step :add_gem
-    step :shell, 'bundle install'
-    step :shell, "rails g rspec:install"
+    name 'rspec-rails'
+    category 'gem'
+    description 'downloads and installs rspec-rails gem'
+    homepage 'https://github.com/rspec/rspec-rails/blob/master/README.md'
+    version '2.0'
 
-  protected
-
-    def add_gem
-      super gem_def
-    end
-
-    def gem_def
-%{group :test, :development do
-  gem "rspec-rails", "~> 2.0"
-end}
+    def initialize
+      gem_group :test, :development do
+        gem "rspec-rails", "~> 2.0"
+      end
+      bundle
+      generate 'rspec:install'
     end
 
   end
-
 end

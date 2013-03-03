@@ -2,21 +2,15 @@ module Bently
 
   class HerokuSendgrid < RailsRecipe
 
-    step :heroku, 'addons:add sendgrid:starter'
-    step :touch_mail_initializer
+    homepage 'https://devcenter.heroku.com/articles/sendgrid#ruby-rails'
 
-  protected
-
-    def heroku command
-      shell("heroku #{command}")
+    def initialize
+      warn 'heroku commands may incur charges to your account'.upcase
+      run 'heroku addons:add sendgrid:starter'
+      create './config/initializers/mail.rb', mail_initializer
     end
 
-    def touch_mail_initializer
-      touch(
-        :file => "./config/initializers/mail.rb",
-        :with => mail_initializer
-      )
-    end
+    protected
 
     def mail_initializer
 %{

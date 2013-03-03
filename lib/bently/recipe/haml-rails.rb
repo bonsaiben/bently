@@ -1,11 +1,16 @@
 module Bently
-
   class HamlRails < RailsRecipe
 
-    step :add_gem, "gem 'haml'"
-    step :add_gem, "gem 'haml-rails'"
-    step :shell, 'bundle install'
+    name 'haml-rails'
+    category 'gem'
+    description 'downloads and installs haml Ruby gem with haml-rails Ruby gem'
+    homepage 'https://github.com/haml/haml/blob/master/README.md'
+
+    def initialize
+      gem 'haml'
+      gem 'haml-rails'
+      bundle
+    end
 
   end
-
 end

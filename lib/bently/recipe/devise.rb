@@ -1,20 +1,18 @@
 module Bently
-
   class Devise < RailsRecipe
-  
-    step :add_gem, "gem 'devise'"
-    step :shell, 'bundle install'
-    step :shell, 'rails g devise:install'
-    step :generate_model
 
-    def generate_model
-      shell(
-        lambda{|model| "rails g devise #{model}" }, 
-        :ask => "Enter a model name (ex. user):", 
-        :description => "Execute:\nrails g devise MODEL"
-      )
+    name 'devise'
+    category 'gem'
+    description 'downloads and installs devise gem'
+    homepage 'https://github.com/plataformatec/devise/blob/master/README.md'
+    version '2.0'
+
+    def initialize
+      gem 'devise'
+      bundle
+      generate 'devise:install'
+      todo 'rails generate devise MODEL'
     end
 
   end
-
 end

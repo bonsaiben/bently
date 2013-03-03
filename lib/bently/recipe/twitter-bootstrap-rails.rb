@@ -1,13 +1,19 @@
 module Bently
-
   class TwitterBootstrapRails < RailsRecipe
 
-    step :add_gem, 'gem "therubyracer"'
-    step :add_gem, 'gem "less-rails"'
-    step :add_gem, 'gem "twitter-bootstrap-rails", "~> 2.2.0"'
-    step :shell, 'bundle install'
-    step :shell, 'rails generate bootstrap:install less'
+    name 'twitter-bootstrap-rails'
+    category 'gem'
+    description 'downloads and installs twitter-bootstrap-rails gem'
+    homepage 'https://github.com/seyhunak/twitter-bootstrap-rails/blob/master/README.md'
+    version '2.2.0'
+
+    def initialize
+      gem 'therubyracer'
+      gem 'less-rails'
+      gem 'twitter-bootstrap-rails', '~> 2.2.0'
+      bundle
+      generate 'bootstrap:install less'
+    end
 
   end
-
 end

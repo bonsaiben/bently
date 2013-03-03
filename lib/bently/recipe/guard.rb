@@ -1,11 +1,15 @@
 module Bently
-
   class Guard < RailsRecipe
-  
-    step :add_gem, "gem 'guard', :group => :development"
-    step :shell, 'bundle install'
-    step :shell, 'guard init'
+
+    homepage 'https://github.com/guard/guard/blob/master/README.md'
+
+    def initialize
+      gem_group :development do
+        gem 'guard'
+      end
+      bundle
+      run 'guard init'
+    end
 
   end
-
 end
