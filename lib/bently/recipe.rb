@@ -105,5 +105,6 @@ module Bently
     def operate(op, *args) ; operations << op.new(*args) end
     def todo(name)    ; say(name, 'TODO', :red) end
     def warn(text)    ; say(text, 'WARNING', :red) end
+    def requirement(text)     ; say(text, 'REQUIRED', :red) end
   end
 end
