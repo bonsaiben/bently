@@ -4,9 +4,9 @@ Bently is a community maintained library of executable recipes for rapid applica
 
 The goal of Bently is to reduce duplication in the development process across projects, with rapid prototyping in mind.
 
-Bently is Homebrew meets Rails generators.
+Bently is [Homebrew](https://github.com/mxcl/homebrew) meets Rails generators.
 
-Bently is built on top of Thor.
+Bently is built on top of [Thor](https://github.com/wycats/thor).
 
 
 Installation
@@ -19,7 +19,7 @@ Usage
 =====
 
     bently list                   # list all recipes
-    bently list [STRING]          # search recipes matching a string
+    bently list [STRING]          # find recipes matching a string
     bently read [RECIPE]          # display a recipe without executing it
     bently bake [RECIPE]          # execute all steps in recipe
     bently bake [RECIPE] --step   # execute a recipe step by step, prompting before each step
@@ -29,9 +29,12 @@ Usage
 Example
 =======
 
-Installing and configuring devise in a Rails application.
+Installing and configuring devise in a Rails application
 
     $ bently bake devise
+    
+which executes and outputs
+
         gemfile  devise
               1  
               2  gem "devise"
