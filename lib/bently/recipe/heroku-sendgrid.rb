@@ -5,7 +5,7 @@ module Bently
     def initialize
       warn 'heroku commands may incur charges to your account'.upcase
       run 'heroku addons:add sendgrid:starter'
-      touch './config/initializers/mail.rb', mail_initializer
+      create './config/initializers/mail.rb', mail_initializer
     end
 
     protected
