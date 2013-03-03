@@ -4,8 +4,7 @@ module Bently
     name 'factory_girl_rails'
     category 'gem'
     description 'downloads and installs factory_girl_rails gem'
-    #homepage ''
-    #version ''
+    homepage 'https://github.com/thoughtbot/factory_girl_rails/blob/master/README.md'
 
     def initialize
       gem_group :test do

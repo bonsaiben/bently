@@ -2,6 +2,8 @@ module Bently
 
   class ActionMailer < RailsRecipe
 
+    homepage 'http://guides.rubyonrails.org/action_mailer_basics.html'
+
     def initialize
       generate 'mailer UserMailer'
       insert 'app/mailers/user_mailer.rb', welcome_email_method, :after => /^.*default.*$/

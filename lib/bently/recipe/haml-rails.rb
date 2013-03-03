@@ -3,9 +3,8 @@ module Bently
 
     name 'haml-rails'
     category 'gem'
-    description 'downloads and installs haml and haml-rails gems'
-    homepage 'https://github.com/indirect/haml-rails'
-    version '0.4'
+    description 'downloads and installs haml Ruby gem with haml-rails Ruby gem'
+    homepage 'https://github.com/haml/haml/blob/master/README.md'
 
     def initialize
       gem 'haml'

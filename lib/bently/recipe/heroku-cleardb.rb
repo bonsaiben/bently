@@ -2,6 +2,8 @@ module Bently
 
   class HerokuCleardb < RailsRecipe
 
+    homepage 'https://devcenter.heroku.com/articles/cleardb#the-short-tutorial-for-ruby-on-rails-apps'
+
     def initialize
       warn 'heroku commands may incur charges to your account'.upcase
       modify 'Gemfile', /gem 'sqlite3'/, ""

@@ -4,7 +4,7 @@ module Bently
     name 'rspec-rails'
     category 'gem'
     description 'downloads and installs rspec-rails gem'
-    homepage 'https://github.com/rspec/rspec-rails'
+    homepage 'https://github.com/rspec/rspec-rails/blob/master/README.md'
     version '2.0'
 
     def initialize

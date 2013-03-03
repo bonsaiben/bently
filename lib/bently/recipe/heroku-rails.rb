@@ -2,6 +2,8 @@ module Bently
 
   class HerokuRails < RailsRecipe
 
+    homepage 'https://devcenter.heroku.com/articles/rails3'
+
     def initialize
       warn 'heroku commands may incur charges to your account'.upcase
       modify 'Gemfile', /gem 'sqlite3'/, ""

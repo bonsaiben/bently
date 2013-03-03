@@ -4,7 +4,7 @@ module Bently
     name 'twitter-bootstrap-rails'
     category 'gem'
     description 'downloads and installs twitter-bootstrap-rails gem'
-    #homepage ''
+    homepage 'https://github.com/seyhunak/twitter-bootstrap-rails/blob/master/README.md'
     version '2.2.0'
 
     def initialize

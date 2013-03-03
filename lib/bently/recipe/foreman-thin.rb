@@ -3,9 +3,8 @@ module Bently
 
     name 'foreman-thin'
     category 'gem'
-    description 'downloads and installs foreman and thin gems'
-    homepage 'https://github.com/plataformatec/devise'
-    #version ''
+    description 'downloads and installs foreman and thin Ruby gems'
+    homepage 'https://devcenter.heroku.com/articles/rails3#webserver'
 
     def initialize
       gem 'thin'

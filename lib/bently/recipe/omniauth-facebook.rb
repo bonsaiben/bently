@@ -2,6 +2,8 @@ module Bently
 
   class OmniauthFacebook < RailsRecipe
 
+    homepage 'https://github.com/mkdynamic/omniauth-facebook/blob/master/README.md'
+
     def initialize
       requirement 'omniauth'
       gem 'omniauth-facebook'

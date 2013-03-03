@@ -4,7 +4,7 @@ module Bently
     name 'devise'
     category 'gem'
     description 'downloads and installs devise gem'
-    homepage 'https://github.com/plataformatec/devise'
+    homepage 'https://github.com/plataformatec/devise/blob/master/README.md'
     version '2.0'
 
     def initialize
