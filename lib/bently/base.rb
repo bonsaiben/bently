@@ -28,6 +28,12 @@ module Bently
       end
     end
 
+    desc 'source [RECIPE]', 'print the URL for the source of the instructions contained in the recipe'
+    def source recipe
+      recipe = Recipebook.find(recipe)
+      puts recipe.homepage
+    end
+
 
     protected
 

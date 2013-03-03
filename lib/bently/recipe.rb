@@ -86,11 +86,11 @@ module Bently
       new.operations
     end
 
-    def self.name(name) @name = name; end
-    def self.category(category) @category = category; end
-    def self.description(description) @description = description; end
-    def self.homepage(homepage) @homepage = homepage; end
-    def self.version(version) @version = version; end
+    def self.name(name) @name ||= name; end
+    def self.category(category) @category ||= category; end
+    def self.description(description) @description ||= description; end
+    def self.homepage(homepage=nil) @homepage ||= homepage; end
+    def self.version(version) @version ||= version; end
 
     def operations; @operations ||= []; end
 
