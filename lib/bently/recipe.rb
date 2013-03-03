@@ -1,63 +1,110 @@
 module Bently
-  
-  module RecipeMethods
-    def self.extended(base)
-      base.send(:include, InstanceMethods) if base.is_a? Class
-    end
-
-    def step(*args)
-      step_args << args
-    end
-
-    def step_args
-      @steps_args ||= []
-    end
-
-    private
-
-    def inherited(subclass)
-      super
-      subclass.step_args.concat self.step_args
-    end
-
-    module InstanceMethods
-      def steps
-        @steps ||= parse_steps
-      end
-
-      protected
-
-      def parse_steps
-        self.class.step_args.map do |args|
-          self.send(args.shift, *args)
-        end
-      end
-    end
-  end
-
   class Recipe
-    extend RecipeMethods
 
-    # step :shell, command
-    def shell(*args); StepShell.new(*args) end
+    class Operation
+      def say; nil end
+      def after; nil end
+    end
 
-    # step :touch, :file => filename, :with => data
-    def touch(*args) StepTouch.new(*args) end
+    class Say < Operation
+      attr_reader :message, :status, :color
+      def initialize *args
+        @message, @status, @color = args
+      end
+      def args
+        @status ? [@status,@message,@color] : [@status]
+      end
+    end
 
-    # step :modify, :file => filename, :from => pattern, :to => replacement
-    def modify(*args) StepModify.new(*args) end
+    class Run < Operation
+      attr_reader :command
+      def initialize *args
+        @command = args.shift
+      end
+    end
 
-    # step :append, :file => filename, :with => data
-    def append(*args) StepAppend.new(*args) end
+    class Create < Operation
+      attr_reader :args, :file, :data
+      def initialize *args
+        @file, @data = @args = args
+      end
+      def after
+        @data.each_line.each_with_index.map{|l,i| [i+1, l] }
+      end
+    end
 
-    # step :prepend, :file => filename, :with => data
-    def prepend(*args) StepPrepend.new(*args) end
+    class Modify < Operation
+      attr_reader :args, :file, :pattern, :replace
+      def initialize *args
+        @file, @pattern, @replace = @args = args
+      end
+      def after
+        [[1,@pattern.inspect], [2,@replace.inspect]]
+      end
+    end
 
-    # step :insert, :file => filename, :with => data, :after => some_text
-    def insert(*args) StepInsert.new(*args) end
+    class Append < Operation
+      attr_reader :file, :data
+      def initialize *args
+        @file, @data = args
+      end
+      def args; [@file, @data] end
+      def after
+        @data.each_line.each_with_index.map{|l,i| [i+1, l] }
+      end
+    end
 
-    # step :remove, :file => filename
-    def remove(*args) StepRemove.new(*args) end
+    class Prepend < Operation
+      attr_reader :args, :file, :data
+      def initialize *args
+        @file, @data = @args = args
+      end
+      def after
+        @data.each_line.each_with_index.map{|l,i| [i+1, l] }
+      end
+    end
+
+    class Insert < Operation
+      attr_reader :args, :file, :data, :options
+      def initialize *args
+        @file, @data, @options = @args = args
+      end
+      def after
+        @data.each_line.each_with_index.map{|l,i| [i+1, l] }
+      end
+    end
+
+    class Remove < Operation
+      attr_reader :args, :file
+      def initialize *args
+        @args = args
+        @file = @args[0]
+      end
+    end
+
+    def self.breakdown
+      new.operations
+    end
+
+    def self.name(name) @name ||= name; end
+    def self.category(category) @category ||= category; end
+    def self.description(description) @description ||= description; end
+    def self.homepage(homepage=nil) @homepage ||= homepage; end
+    def self.version(version) @version ||= version; end
+
+    def operations; @operations ||= []; end
+
+    def say(*args)     ; operations << Say.new(*args) end
+    def run(*args)     ; operations << Run.new(*args) end
+    def create(*args)  ; operations << Create.new(*args) end
+    def modify(*args)  ; operations << Modify.new(*args) end
+    def append(*args)  ; operations << Append.new(*args) end
+    def prepend(*args) ; operations << Prepend.new(*args) end
+    def insert(*args)  ; operations << Insert.new(*args) end
+    def remove(*args)  ; operations << Remove.new(*args) end
+    def operate(op, *args) ; operations << op.new(*args) end
+    def todo(name)    ; say(name, 'TODO', :red) end
+    def warn(text)    ; say(text, 'WARNING', :red) end
+    def requirement(text)     ; say(text, 'REQUIRED', :red) end
   end
-
 end

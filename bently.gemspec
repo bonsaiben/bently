@@ -4,11 +4,10 @@ require "bently/version"
 Gem::Specification.new do |s|
   s.name        = 'bently'
   s.version     = Bently::VERSION
-  s.date        = '2012-09-15'
-  s.summary     = "Bently executes (bakes) predefined formulas (recipes)"
-  s.description = "Bently executes (bakes) predefined formulas (recipes) for trivial stuff you do a lot"
+  s.summary     = "Application-level dependency installation/configuration recipe manager"
+  s.description = "Bently is a community maintained library of recipes for the installation and configuration of application-level dependencies"
   s.authors     = ["Benjamin Sullivan"]
-  s.email       = 'bsullivan2@gmail.com'
+  s.email       = 'ruby-bently@googlegroups.com'
   s.homepage    = 'http://github.com/bonsaiben/bently'
 
   s.add_dependency "thor", ">= 0.14.6"

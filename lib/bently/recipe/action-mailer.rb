@@ -2,34 +2,16 @@ module Bently
 
   class ActionMailer < RailsRecipe
 
-    step :shell, 'rails g mailer UserMailer'
-    step :add_welcome_email_method
-    step :touch_welcome_email_html
-    step :touch_welcome_email_text
+    homepage 'http://guides.rubyonrails.org/action_mailer_basics.html'
 
-  protected
-
-    def add_welcome_email_method
-      insert(
-        :file => 'app/mailers/user_mailer.rb', 
-        :with => welcome_email_method,
-        :after => /^.*default.*$/
-      )
+    def initialize
+      generate 'mailer UserMailer'
+      insert 'app/mailers/user_mailer.rb', welcome_email_method, :after => /^.*default.*$/
+      create './app/views/user_mailer/welcome_email.html.erb', welcome_email_html
+      create './app/views/user_mailer/welcome_email.text.erb', welcome_email_text
     end
 
-    def touch_welcome_email_html
-      touch(
-        :file => './app/views/user_mailer/welcome_email.html.erb', 
-        :with => welcome_email_html
-      )
-    end
-
-    def touch_welcome_email_text
-      touch(
-        :file => './app/views/user_mailer/welcome_email.text.erb', 
-        :with => welcome_email_text
-      )
-    end
+    protected
 
     def welcome_email_method
 %{
@@ -76,7 +58,7 @@ To login to the site, just follow this link: <%= @url %>.
 Thanks for joining and have a great day!
 }
     end
-    
+
   end
 
 end

@@ -1,26 +1,21 @@
 module Bently
 
-  class HerokuRails < Recipe
+  class HerokuRails < RailsRecipe
 
-    step :group_sqlite3_gem_in_test_development
-    step :append,  :file => 'Gemfile', :with => "gem 'pg', :group => :production"
-    step :shell, 'bundle install --without production'
+    homepage 'https://devcenter.heroku.com/articles/rails3'
 
-    step :shell, 'git add Gemfile Gemfile.lock'
-    step :shell, 'git commit -m "pg for heroku"'
+    def initialize
+      warn 'heroku commands may incur charges to your account'.upcase
+      modify 'Gemfile', /gem 'sqlite3'/, ""
+      gem 'pg'
+      bundle
 
-    step :shell, 'heroku create'
-    step :shell, 'git push heroku master'
-    step :shell, 'heroku run rake db:migrate'
+      run 'git add Gemfile Gemfile.lock'
+      run 'git commit -m "postgres gem"'
 
-    protected
-
-    def group_sqlite3_gem_in_test_development
-      modify(
-        :file => 'Gemfile', 
-        :from => /gem 'sqlite3'/, 
-        :to => "gem 'sqlite3', :group => [:test, :development]"
-      )
+      run 'heroku create'
+      run 'git push heroku master'
+      run 'heroku run rake db:migrate'
     end
 
   end
