@@ -1,7 +1,7 @@
 module Bently
   class RspecRails < RailsRecipe
 
-    name 'rspec-rails'
+    title 'rspec-rails'
     category 'gem'
     description 'downloads and installs rspec-rails gem'
     homepage 'https://github.com/rspec/rspec-rails/blob/master/README.md'

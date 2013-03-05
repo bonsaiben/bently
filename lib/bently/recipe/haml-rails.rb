@@ -1,7 +1,7 @@
 module Bently
   class HamlRails < RailsRecipe
 
-    name 'haml-rails'
+    title 'haml-rails'
     category 'gem'
     description 'downloads and installs haml Ruby gem with haml-rails Ruby gem'
     homepage 'https://github.com/haml/haml/blob/master/README.md'

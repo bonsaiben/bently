@@ -1,7 +1,7 @@
 module Bently
   class ForemanThin < RailsRecipe
 
-    name 'foreman-thin'
+    title 'foreman-thin'
     category 'gem'
     description 'downloads and installs foreman and thin Ruby gems'
     homepage 'https://devcenter.heroku.com/articles/rails3#webserver'

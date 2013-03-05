@@ -1,7 +1,7 @@
 module Bently
   class FactoryGirlRails < RailsRecipe
 
-    name 'factory_girl_rails'
+    title 'factory_girl_rails'
     category 'gem'
     description 'downloads and installs factory_girl_rails gem'
     homepage 'https://github.com/thoughtbot/factory_girl_rails/blob/master/README.md'

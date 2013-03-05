@@ -1,7 +1,7 @@
 module Bently
   class Devise < RailsRecipe
 
-    name 'devise'
+    title 'devise'
     category 'gem'
     description 'downloads and installs devise gem'
     homepage 'https://github.com/plataformatec/devise/blob/master/README.md'

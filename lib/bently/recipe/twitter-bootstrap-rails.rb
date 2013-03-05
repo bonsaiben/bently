@@ -1,7 +1,7 @@
 module Bently
   class TwitterBootstrapRails < RailsRecipe
 
-    name 'twitter-bootstrap-rails'
+    title 'twitter-bootstrap-rails'
     category 'gem'
     description 'downloads and installs twitter-bootstrap-rails gem'
     homepage 'https://github.com/seyhunak/twitter-bootstrap-rails/blob/master/README.md'

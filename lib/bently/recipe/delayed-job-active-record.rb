@@ -1,7 +1,7 @@
 module Bently
   class DelayedJobActiveRecord < RailsRecipe
 
-    name 'delayed_job Active Record'
+    title 'delayed_job Active Record'
     category 'gem'
     description 'downloads and installs delayed_job_active_record gem'
     homepage 'https://github.com/collectiveidea/delayed_job/blob/master/README.md'
