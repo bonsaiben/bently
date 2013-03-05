@@ -1,7 +1,7 @@
 module Bently
   class Foreman < RubyRecipe
 
-    name 'foreman'
+    title 'foreman'
     category 'gem'
     description 'downloads and installs foreman gem'
     homepage 'https://github.com/ddollar/foreman/blob/master/README.md'

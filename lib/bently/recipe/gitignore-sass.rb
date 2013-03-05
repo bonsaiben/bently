@@ -5,15 +5,7 @@ module Bently
     homepage 'https://github.com/github/gitignore/blob/master/Global/SASS.gitignore'
 
     def initialize
-      append '.gitignore', gitignore
-    end
-
-    protected
-
-    def gitignore
-%{### SASS Ignores - "Sassy CSS" http://sass-lang.com/
-*.sass-cache
-}
+      append '.gitignore', template('.gitignore')
     end
 
   end

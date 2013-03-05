@@ -1,7 +1,7 @@
 module Bently
   class CucumberRails < RailsRecipe
 
-    name 'cucumber-rails'
+    title 'cucumber-rails'
     category 'gem'
     description 'downloads and installs cucumber-rails gem'
     homepage 'https://github.com/cucumber/cucumber-rails'

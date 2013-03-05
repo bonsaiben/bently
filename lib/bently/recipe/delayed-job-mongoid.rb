@@ -1,7 +1,7 @@
 module Bently
   class DelayedJobMongoid < RailsRecipe
 
-    name 'delayed_job Mongoid'
+    title 'delayed_job Mongoid'
     category 'gem'
     description 'downloads and installs delayed_job_mongoid gem'
     homepage 'https://github.com/collectiveidea/delayed_job/blob/master/README.md'

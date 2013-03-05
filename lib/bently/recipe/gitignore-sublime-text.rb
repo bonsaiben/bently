@@ -5,14 +5,7 @@ module Bently
     homepage 'https://github.com/github/gitignore/blob/master/Global/SublimeText.gitignore'
 
     def initialize
-      append '.gitignore', gitignore
-    end
-
-    protected
-
-    def gitignore
-%{# SublimeText project files
-*.sublime-workspace}
+      append '.gitignore', template('.gitignore')
     end
 
   end

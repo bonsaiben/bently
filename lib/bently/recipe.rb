@@ -86,7 +86,7 @@ module Bently
       new.operations
     end
 
-    def self.name(name) @name ||= name; end
+    def self.title(n) @title ||= n; end
     def self.category(category) @category ||= category; end
     def self.description(description) @description ||= description; end
     def self.homepage(homepage=nil) @homepage ||= homepage; end
@@ -106,5 +106,17 @@ module Bently
     def todo(name)    ; say(name, 'TODO', :red) end
     def warn(text)    ; say(text, 'WARNING', :red) end
     def requirement(text)     ; say(text, 'REQUIRED', :red) end
+
+    protected
+
+    def template name
+      f = "#{BENTLY_REPOSITORY}/lib/bently/template/#{file_name}/#{name}"
+      File.read(f)
+    end
+
+    def file_name
+      string = self.class.instance_method(:initialize).source_location[0]
+      string = string.split('/').last.split('.').first
+    end
   end
 end

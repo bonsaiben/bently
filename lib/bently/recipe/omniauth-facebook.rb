@@ -14,8 +14,7 @@ module Bently
     protected
 
     def omniauth_initializer
-%{provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
-}
+      "provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']"
     end
 
   end
