@@ -3,7 +3,7 @@ module Bently
   class RailsRecipe < RubyRecipe
 
     def generate command
-      run "rails generate #{command}"
+      run "bundle exec rails generate #{command}"
     end
 
   end
