@@ -86,7 +86,7 @@ module Bently
       new.operations
     end
 
-    def self.name(name) @name ||= name; end
+    def self.title(n) @title ||= n; end
     def self.category(category) @category ||= category; end
     def self.description(description) @description ||= description; end
     def self.homepage(homepage=nil) @homepage ||= homepage; end
