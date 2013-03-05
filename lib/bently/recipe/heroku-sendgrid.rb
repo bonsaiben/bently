@@ -7,23 +7,7 @@ module Bently
     def initialize
       warn 'heroku commands may incur charges to your account'.upcase
       run 'heroku addons:add sendgrid:starter'
-      create './config/initializers/mail.rb', mail_initializer
-    end
-
-    protected
-
-    def mail_initializer
-%{
-ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.sendgrid.net',
-  :port           => '587',
-  :authentication => :plain,
-  :user_name      => ENV['SENDGRID_USERNAME'],
-  :password       => ENV['SENDGRID_PASSWORD'],
-  :domain         => 'heroku.com'
-}
-ActionMailer::Base.delivery_method = :smtp
-}
+      create './config/initializers/mail.rb', template('mail.rb')
     end
 
   end
