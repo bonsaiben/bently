@@ -6,5 +6,9 @@ module Bently
       run "bundle exec rails generate #{command}"
     end
 
+    def migrate
+      run 'bundle exec rake db:migrate'
+    end
+
   end
 end
