@@ -106,6 +106,7 @@ module Bently
     def todo(name)    ; say(name, 'TODO', :red) end
     def warn(text)    ; say(text, 'WARNING', :red) end
     def requirement(text)     ; say(text, 'REQUIRED', :red) end
+    def usage(text)     ; say(text, 'USAGE', :red) end
 
     protected
 
