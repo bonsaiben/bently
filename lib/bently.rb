@@ -1,6 +1,7 @@
 require 'thor'
 
 require 'bently/core_ext/string'
+require 'bently/core_ext/method'
 require 'bently/globals'
 require 'bently/recipe'
 require 'bently/recipebook'
