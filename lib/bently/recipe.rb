@@ -107,6 +107,7 @@ module Bently
     def warn(text)    ; say(text, 'WARNING', :red) end
     def requirement(text)     ; say(text, 'REQUIRED', :red) end
     def usage(text)     ; say(text, 'USAGE', :red) end
+    def code(text)     ; text.each_line.each_with_index{|l,i| say(l, i+1, :magenta) } end
 
     protected
 
