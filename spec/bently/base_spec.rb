@@ -199,6 +199,7 @@ describe Bently::Base do
       @bently.read 'simple_form'
       @bently.read 'twitter'
       @bently.read 'twitter-bootstrap-rails'
+      @bently.read 'backbone-rails'
     end
   end
 
