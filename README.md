@@ -58,6 +58,12 @@ Available Recipes
 You can browse the recipe library on GitHub: https://github.com/bonsaiben/bently/tree/master/lib/bently/recipe
 
 
+Contributing
+------------
+
+I imagine there's a lot that could be improved with Bently, so contributions are greatly appreciated 
+
+
 License
 -------
 Released under the MIT License.  See the [LICENSE][] file for further details.
