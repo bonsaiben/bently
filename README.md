@@ -10,13 +10,13 @@ Bently is built on top of [Thor](https://github.com/wycats/thor).
 
 
 Installation
-============
+------------
 
     gem install bently
 
 
 Usage
-=====
+-----
 
     bently list                   # list all recipes
     bently list [STRING]          # find recipes matching a string
@@ -27,7 +27,7 @@ Usage
 
 
 Example
-=======
+-------
 
 Installing and configuring devise in a Rails application
 
@@ -53,7 +53,7 @@ The recipe for devise looks like:
 
 
 Available Recipes
-=================
+-----------------
 
 You can browse the recipe library on GitHub: https://github.com/bonsaiben/bently/tree/master/lib/bently/recipe
 
