@@ -1,10 +1,10 @@
 [<img src="https://secure.travis-ci.org/bonsaiben/bently.png">](http://travis-ci.org/bonsaiben/bently)
 
-Bently is a community maintained library of executable recipes for rapid application development. The bulk of recipes are for automating installation and configuration of commonly-used dependencies. Another potential use case is feature scaffolding, or laying down basic implementation for common functionality like social authentication.
+Bently is a community maintained library of executable recipes, primarily for installing and configuring Rails application dependencies.
 
 The goal of Bently is to reduce duplication in the development process across projects, with rapid prototyping in mind.
 
-Bently is [Homebrew](https://github.com/mxcl/homebrew) meets Rails generators.
+Bently is essentially [Homebrew](https://github.com/mxcl/homebrew) meets Rails generators.
 
 Bently is built on top of [Thor](https://github.com/wycats/thor).
 
